@@ -34,11 +34,11 @@ namespace Zakharov {
         /// <remarks>Теги представляются в виде строк.</remarks>
         public class CTags : ITaggable {
             /// <summary>Значение конфигурации, в котором сохраняется имя файла базы данных.</summary>
-            public const char n_cSettings_TagSeparator = ';';
+            public const char n_cSettings_TagSeparator=';';
 
             /// <summary>Перечень тегов.</summary>
             /// <remarks>Список тегов содержит только уникальные значения.</remarks>
-            private HashSet<string> m_hsTags = new HashSet<string>();
+            private HashSet<string> m_hsTags=new HashSet<string>();
 
             /// <summary>Список тегов, разделенный определенным символом.</summary>
             /// <returns>Строка с тегами.</returns>
@@ -58,7 +58,7 @@ namespace Zakharov {
             /// <summary>Возвращает строковое представление текущего объекта.</summary>
             /// <returns>Строка, представляющая текущий объект.</returns>
             public override string ToString() {
-                return CFormat.GetConcat(m_hsTags,CTags.n_cSettings_TagSeparator);                
+                return CFormat.GetConcat(m_hsTags,n_cSettings_TagSeparator);                
             }
             /// <summary>Играет роль хэш-функции для определённого типа.</summary>
             /// <returns>Хэш-код для текущего объекта.</returns>
