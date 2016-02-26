@@ -34,7 +34,7 @@ namespace Zakharov {
             }
 
 
-            public object Evaluate(string x_sExpression) {
+            public T Evaluate<T>(string x_sExpression) {
                 CompilerResults c_crResult=m_cpCompiler.CompileAssemblyFromSource(
                     m_cpCompilerOptions, 
                     String.Concat(n_sTemplate_AssemblyBegin,x_sExpression,n_sTemplate_AssemblyEnd));
@@ -45,7 +45,7 @@ namespace Zakharov {
                     throw new ArgumentException(c_sbErrors.ToString(), "x_sExpression");
                 }
 
-                return (object)c_crResult.CompiledAssembly.GetType("Evaluator").GetMethod("Evaluate").Invoke(null, null);
+                return (T)c_crResult.CompiledAssembly.GetType("Evaluator").GetMethod("Evaluate").Invoke(null, null);
             }
         }
     }
