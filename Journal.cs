@@ -311,7 +311,7 @@ namespace Zakharov {
             /// <summary>Шаблон для формирования полного имени папки для хранения журнала сообщений.</summary>
             private const string n_sTemplate_MessageFolder="{0}\\{1:d4}\\{2}-{3}\\{4:d2}\\";
             /// <summary>Шаблон для формирования полного имени файла для хранения журнала сообщений.</summary>
-            private const string n_sTemplate_MessageFile="{0}\\{1} {2}.log";
+            private const string n_sTemplate_MessageFile="{0}\\{1}.{2}";
             /// <summary>Шаблон для строки сообщения.</summary>
             private const string n_sTemplate_ReleaseLine="{0:d2}:{1:d2}:{2:d2}.{3:d3}\t{4}\t{5}\r\n";
             /// <summary>Шаблон для строки отладочного сообщения.</summary>
@@ -365,13 +365,13 @@ namespace Zakharov {
                 string c_sFileExtension="";
                 switch (x_ulType) {
                     case MessageTypeEnum.ERROR_MESSAGE:
-                        c_sFileExtension="error";
+                        c_sFileExtension="err";
                         break;
                     case MessageTypeEnum.WARNING_MESSAGE:
-                        c_sFileExtension="warning";
+                        c_sFileExtension="wrn";
                         break;
                     case MessageTypeEnum.INFORMATION_MESSAGE:
-                        c_sFileExtension="information";
+                        c_sFileExtension="inf";
                         break;
                 }
                 // Формирование строки с именем файла журнала сообщений.
