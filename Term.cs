@@ -7,37 +7,40 @@ namespace Zakharov {
     //  Создание пространства имен выражений.
     namespace Term {
 
-        public class CTerm {
-            /// <summary>Шаблон для содержимого сборки.</summary>
-            private const string n_sTemplate_AssemblyContent="using System; public static class Term {{ public static object Evaluate() {{ return {0}; }} }}";
+        /// <summary>Обработчик вычисления выражений.</summary>
+        public class CEvaluator {
+            /// <summary>Шаблон для начала содержимого сборки.</summary>
+            private const string n_sTemplate_AssemblyBegin = "using System; public static class Evaluator { public static object Evaluate() { return ";
+            /// <summary>Шаблон для конца содержимого сборки.</summary>
+            private const string n_sTemplate_AssemblyEnd="; } }";
+
+            #region Реализация шаблона одиночка (singleton)
+            /// <summary>Единственный экзмепляр класса</summary>
+            private static CEvaluator m_ojInstance=null;
 
             /// <summary>Единственный экзмепляр класса</summary>
-            private static CTerm m_ojInstance=null;
-
-            /// <summary>Единственный экзмепляр класса</summary>
-            public static CTerm Instance {
+            public static CEvaluator Instance {
                 get {
-                    return m_ojInstance ?? (m_ojInstance = new CTerm());
+                    return m_ojInstance ?? (m_ojInstance = new CEvaluator());
                 }
             }
+            #endregion
 
             /// <summary>Создание объекта.</summary>
             /// <remarks>Конструктор класса объявлен защищенным, чтобы предотвратить создание экземпляра класса.</remarks>
-            protected CTerm() {
+            protected CEvaluator() {
             }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <typeparam name="T"></typeparam>
-            /// <param name="x_sTerm"></param>
-            /// <returns></returns>
+            /// <summary>Вычисление выражения.</summary>
+            /// <typeparam name="T">тип результата вычисления выражения</typeparam>
+            /// <param name="x_sTerm">выражение</param>
+            /// <returns>результат вычисления выражения</returns>
             public T EvaluateTerm<T>(string x_sTerm) {                                
                 // Компиляция сборки, содержащей класс с единственным методом, возвращающим результат вычисления выражения.
                 CompilerResults c_crAssembly=CodeDomProvider.CreateProvider("c#").CompileAssemblyFromSource(
                     new CompilerParameters(new string[]{"mscorlib.dll"}) {
                         GenerateInMemory=true
                     }, 
-                    String.Format(n_sTemplate_AssemblyContent,x_sTerm));                    
+                    String.Concat(n_sTemplate_AssemblyBegin,x_sTerm,n_sTemplate_AssemblyEnd));                    
                 if (c_crAssembly.Errors.HasErrors) {
                     StringBuilder c_sbErrors=new StringBuilder();
                     foreach(CompilerError c_eError in c_crAssembly.Errors)
@@ -46,7 +49,7 @@ namespace Zakharov {
                 }
 
                 // Выполнение метода, возвращающего результат вычисления выражения.
-                return (T)c_crAssembly.CompiledAssembly.GetType("Term").GetMethod("Evaluate").Invoke(null, null);
+                return (T)c_crAssembly.CompiledAssembly.GetType("Evaluator").GetMethod("Evaluate").Invoke(null, null);
             }
         }
     }
