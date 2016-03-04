@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Evaluator.cs" />
+    <Compile Include="Term.cs" />
     <Compile Include="Handbook.cs" />
     <Compile Include="Journal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
