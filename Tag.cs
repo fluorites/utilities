@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using Zakharov.Handbook;
 
-//  Создание пространства имен Антона Ю. Захарова
+//  Создание пространства имен Антона Захарова.
 namespace Zakharov {
     //  Создание пространства имен тегов.
     namespace Tag {
@@ -33,7 +33,7 @@ namespace Zakharov {
         /// <summary>Список тегов объектов.</summary>
         /// <remarks>Теги представляются в виде строк.</remarks>
         public class CTags : ITaggable {
-            /// <summary>Значение конфигурации, в котором сохраняется имя файла базы данных.</summary>
+            /// <summary>Символ, используемый для разделения тегов в строке.</summary>
             public const char n_cSettings_TagSeparator=';';
 
             /// <summary>Перечень тегов.</summary>
@@ -42,6 +42,7 @@ namespace Zakharov {
 
             /// <summary>Список тегов, разделенный определенным символом.</summary>
             /// <returns>Строка с тегами.</returns>
+            /// <remarks>Свойство со списком тегов не поддерживается. Для получения списка тегов следует использовать метод GetTags.</remarks>
             public string Tags {
                 get {
                     throw new NotImplementedException();

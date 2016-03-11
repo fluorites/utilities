@@ -2,7 +2,7 @@
 using System.CodeDom.Compiler;
 using System.Text;
 
-//  Создание пространства имен Антона Ю. Захарова
+//  Создание пространства имен Антона Захарова.
 namespace Zakharov {
     //  Создание пространства имен выражений.
     namespace Term {

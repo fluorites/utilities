@@ -13,7 +13,7 @@ using Zakharov.Handbook;
 using System.Configuration;
 using System.Collections.Generic;
 
-//  Создание пространства имен Антона Ю. Захарова
+//  Создание пространства имен Антона Захарова.
 namespace Zakharov {
     //  Создание пространства имен журнала сообщений.
     namespace Journal {

@@ -9,7 +9,7 @@ using System.Text;
 using System.Security.Cryptography;
 using System.Collections.Generic;
 
-//  Создание пространства имен Антона Ю. Захарова
+//  Создание пространства имен Антона Захарова.
 namespace Zakharov {
     //  Создание пространства имен дополнительных функций.
     namespace Handbook {
