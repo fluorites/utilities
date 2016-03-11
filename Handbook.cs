@@ -17,8 +17,8 @@ namespace Zakharov {
         /// <summary>Класс дополнительных функций форматирования.</summary>
         public static class CFormat {
             /// <summary>Формирование строки с названием месяца.</summary>
-            /// <param name="x_lMonth">индекс месяца. Замечание: месяцы нумеруются начиная с 1.</param>>
-            /// <returns>строка с названием месяца.</returns>>
+            /// <param name="x_lMonth">индекс месяца. Замечание: месяцы нумеруются начиная с 1.</param>
+            /// <returns>строка с названием месяца.</returns>
             public static string GetMonth(long x_lMonth) {
                 string[] c_sMonths=new string[] {
                     CResource.LoadString("IDS_VAL_JANUARY"),
@@ -54,8 +54,8 @@ namespace Zakharov {
                 return c_sArguments;
             }
             /// <summary>Формирование строки с информацией о строке в программном коде.</summary>
-            /// <param name="x_sfCaller">информация о стеке вызова.</param>>
-            /// <returns>строка с информацией о строке в программном коде.</returns>>
+            /// <param name="x_sfCaller">информация о стеке вызова.</param>
+            /// <returns>строка с информацией о строке в программном коде.</returns>
             public static string GetCaller(StackFrame x_sfCaller) {
                 if (x_sfCaller.GetFileName()!=null)
                     return String.Format("{0}|{1} at {2} on line {3}",
@@ -70,8 +70,8 @@ namespace Zakharov {
                         x_sfCaller.GetFileLineNumber());
             }
             /// <summary>Преобразование объекта в строку с проверкой на null.</summary>
-            /// <param name="x_ojValue">произвольный объект.</param>>
-            /// <returns>строковое представление объекта.</returns>>
+            /// <param name="x_ojValue">произвольный объект.</param>
+            /// <returns>строковое представление объекта.</returns>
             public static string GetNull(object x_ojValue) {
                 if (x_ojValue==null)
                     return "null";
@@ -79,8 +79,8 @@ namespace Zakharov {
                     return x_ojValue.ToString();
             }
             /// <summary>Формирование строки с перечислением элементов массива.</summary>
-            /// <param name="x_ojArguments">массив элементов.</param>>
-            /// <returns>строка с перечислением элементов массива.</returns>>
+            /// <param name="x_ojArguments">массив элементов.</param>
+            /// <returns>строка с перечислением элементов массива.</returns>
             public static string GetArray(object[] x_ojArguments) {
                 StringBuilder c_sbArguments=new StringBuilder();
 
@@ -93,8 +93,8 @@ namespace Zakharov {
             }
             /// <summary>Формирование строки с описаниями всех внутренних исключений данного исключения.</summary>
             /// <param name="x_eError">исключение.</param>>
-            /// <param name="x_bInner">если true, то возвращается описание только самого внутреннего исключения.</param>>
-            /// <returns>строка с описаниями всех внутренних исключений данного исключения.</returns>>
+            /// <param name="x_bInner">если true, то возвращается описание только самого внутреннего исключения.</param>
+            /// <returns>строка с описаниями всех внутренних исключений данного исключения.</returns>
             public static string GetException(Exception x_eError, bool x_bInner=false) {
                 string c_sMessage=x_eError.Message;
 
@@ -110,8 +110,8 @@ namespace Zakharov {
                 return c_sMessage;
             }
             /// <summary>Формирование строки с хэш-кодом передаваемой строки.</summary>
-            /// <param name="x_sSource">строка, для которой необходимо рассчитать хэш-код.</param>>
-            /// <returns>строка с хэш-кодом передаваемой строки.</returns>>
+            /// <param name="x_sSource">строка, для которой необходимо рассчитать хэш-код.</param>
+            /// <returns>строка с хэш-кодом передаваемой строки.</returns>
             public static string GetHash(this string x_sSource) {
                 string c_sHashValue="";
 
@@ -126,9 +126,9 @@ namespace Zakharov {
                 return c_sHashValue;
             }
             /// <summary>Выделение первых n-символов в строке.</summary>
-            /// <param name="x_sSource">строка, из которой необходимо выделить первых n-символов.</param>>
-            /// <param name="x_iCount">количество символов.</param>>
-            /// <returns>строка из n первых символов передаваемой строки или передаваемая строка, если количество символов в ней меньше n.</returns>>
+            /// <param name="x_sSource">строка, из которой необходимо выделить первых n-символов.</param>
+            /// <param name="x_iCount">количество символов.</param>
+            /// <returns>строка из n первых символов передаваемой строки или передаваемая строка, если количество символов в ней меньше n.</returns>
             public static string Choose(this string x_sSource, int x_iCount) {
                 if (x_sSource.Length<x_iCount)
                     return x_sSource;
@@ -136,9 +136,9 @@ namespace Zakharov {
                     return x_sSource.Substring(0, x_iCount);                
             }
             /// <summary>Сцепление строк со вставкой между ними разделителя.</summary>
-            /// <param name="x_sValues">список сцепляемых строк.</param>>
-            /// <param name="x_cSeparator">символ разделителя.</param>>
-            /// <returns>строка из сцепленных строк со вставленными между ними разделителями.</returns>>
+            /// <param name="x_sValues">список сцепляемых строк.</param>
+            /// <param name="x_cSeparator">символ разделителя.</param>
+            /// <returns>строка из сцепленных строк со вставленными между ними разделителями.</returns>
             public static string GetConcat(IEnumerable<string> x_sValues, char x_cSeparator) {
                 StringBuilder c_sbValues = new StringBuilder();
 
@@ -152,14 +152,14 @@ namespace Zakharov {
         /// <summary>Класс дополнительных функций работы с ресурсами сборки.</summary>
         public class CResource {
             /// <summary>Чтение строки из файла ресурсов вызывающей сборки.</summary>
-            /// <param name="x_sName">имя ресурса.</param>>
-            /// <returns>строка со значением требуемой ресурсной строки.</returns>>
-            /// <remarks>Для поиска строки выбирается ресурсный файл с именем Strings.resx.</remarks>>
+            /// <param name="x_sName">имя ресурса.</param>
+            /// <returns>строка со значением требуемой ресурсной строки.</returns>
+            /// <remarks>Для поиска строки выбирается ресурсный файл с именем Strings.resx.</remarks>
             static public string LoadString(string x_sName) {
                 ResourceManager c_rmManager=new ResourceManager(
                     Assembly.GetCallingAssembly().GetName().Name+".Strings",
                     Assembly.GetCallingAssembly());
-
+                
                 return c_rmManager.GetString(x_sName, Thread.CurrentThread.CurrentUICulture);
             }
         }
@@ -167,9 +167,9 @@ namespace Zakharov {
         /// <summary>Класс дополнительных функций работы с реестром Windows.</summary>
         public static class CRegistry {
             /// <summary>Проверка существования заданного значения в реестре и, если оно не существует, создание пустого значения.</summary>
-            /// <param name="x_rgKey">раздел реестра.</param>>
-            /// <param name="x_sName">имя значения.</param>>
-            /// <returns>true, если заданное значение существует.</returns>>
+            /// <param name="x_rgKey">раздел реестра.</param>
+            /// <param name="x_sName">имя значения.</param>
+            /// <returns>true, если заданное значение существует.</returns>
             public static bool Exists(this RegistryKey x_rgKey, string x_sName) {
                 // Чтение значения в реестре.
                 if (x_rgKey.GetValue(x_sName)==null) {
@@ -193,10 +193,10 @@ namespace Zakharov {
         /// <summary>Класс дополнительных функций работы с документами XML.</summary>
         public class CXml {
             /// <summary>Создание нового элемента с указанной информацией в атрибутах в указанном узле документа XML.</summary>
-            /// <param name="x_xnElementParent">узел документа XML, в который добавляется новый элемент.</param>>
-            /// <param name="x_sElementName">имя нового элемента.</param>>
-            /// <param name="x_lElementType">тип нового элемента.</param>>
-            /// <param name="x_sElementData">данные нового элемента.</param>>
+            /// <param name="x_xnElementParent">узел документа XML, в который добавляется новый элемент.</param>
+            /// <param name="x_sElementName">имя нового элемента.</param>
+            /// <param name="x_lElementType">тип нового элемента.</param>
+            /// <param name="x_sElementData">данные нового элемента.</param>
             static public void AddElement(
                 XmlNode x_xnElementParent,
                 string x_sElementName,
@@ -231,8 +231,8 @@ namespace Zakharov {
                 x_xnElementParent.AppendChild(c_xnElement);
             }
             /// <summary>Формирование строки с информацией об узле с исключением подчиненных элементов.</summary>
-            /// <param name="x_xnElementNode">узел документа XML.</param>>
-            /// <returns>строка с информацией об узле.</returns>>
+            /// <param name="x_xnElementNode">узел документа XML.</param>
+            /// <returns>строка с информацией об узле.</returns>
             static public string GetElement(XmlNode x_xnElementNode) {
                 string c_sElementNode="<"+x_xnElementNode.Name;
 
@@ -244,8 +244,8 @@ namespace Zakharov {
                 return c_sElementNode;
             }
             /// <summary>Формирование узла из строки с информацией об узле.</summary>
-            /// <param name="x_sElementNode">строка с информацией об узле.</param>>
-            /// <returns>узел документа XML.</returns>>
+            /// <param name="x_sElementNode">строка с информацией об узле.</param>
+            /// <returns>узел документа XML.</returns>
             static public XmlNode GetElement(string x_sElementNode) {
                 // Получение документа XML.
                 XmlDocument c_xdElementDocument=new XmlDocument();

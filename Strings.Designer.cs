@@ -61,6 +61,15 @@ namespace Utilities {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Failed to compile the expression. {0}.
+        /// </summary>
+        internal static string IDS_ERR_COMPILERERROR {
+            get {
+                return ResourceManager.GetString("IDS_ERR_COMPILERERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Empty tag value..
         /// </summary>
         internal static string IDS_ERR_EMPTYTAGAVLUE {

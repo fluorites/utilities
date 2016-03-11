@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom.Compiler;
 using System.Text;
+using Zakharov.Handbook;
 
 //  Создание пространства имен Антона Захарова.
 namespace Zakharov {
@@ -18,7 +19,7 @@ namespace Zakharov {
             /// <summary>Единственный экзмепляр класса</summary>
             private static CEvaluator m_ojInstance=null;
 
-            /// <summary>Единственный экзмепляр класса</summary>
+            /// <summary>Единственный экземпляр класса.</summary>
             public static CEvaluator Instance {
                 get {
                     return m_ojInstance ?? (m_ojInstance = new CEvaluator());
@@ -42,10 +43,16 @@ namespace Zakharov {
                     }, 
                     String.Concat(n_sTemplate_AssemblyBegin,x_sTerm,n_sTemplate_AssemblyEnd));                    
                 if (c_crAssembly.Errors.HasErrors) {
+                    #region Формирование сообщения об ошибке компиляции
                     StringBuilder c_sbErrors=new StringBuilder();
                     foreach(CompilerError c_eError in c_crAssembly.Errors)
                         c_sbErrors.AppendLine(c_eError.ErrorText);
-                    throw new ArgumentException(c_sbErrors.ToString(), "x_sExpression");                    
+                    throw new ArgumentException(
+                        String.Format(
+                            CResource.LoadString("IDS_ERR_COMPILERERROR"),
+                            c_sbErrors.ToString()), 
+                        "x_sExpression");
+                    #endregion
                 }
 
                 // Выполнение метода, возвращающего результат вычисления выражения.
