@@ -61,7 +61,7 @@ namespace Utilities {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Failed to compile the expression. {0}.
+        ///   Ищет локализованную строку, похожую на Failed to compile the expression [{0}]. {1}.
         /// </summary>
         internal static string IDS_ERR_COMPILERERROR {
             get {

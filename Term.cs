@@ -8,12 +8,15 @@ namespace Zakharov {
     //  Создание пространства имен выражений.
     namespace Term {
 
-        /// <summary>Обработчик вычисления выражений.</summary>
+        /// <summary>Обработчик вычисления выражений, записанных в виде строки.</summary>
         public class CEvaluator {
-            /// <summary>Шаблон для начала содержимого сборки.</summary>
-            private const string n_sTemplate_AssemblyBegin = "using System; public static class Evaluator { public static object Evaluate() { return ";
-            /// <summary>Шаблон для конца содержимого сборки.</summary>
-            private const string n_sTemplate_AssemblyEnd="; } }";
+            /// <summary>Шаблон для содержимого сборки.</summary>
+            /// <remarks>Поскольку шаблон строки будет заполняться с помощью метода String.Format фигурные скобки в коде дублируются.</remarks>
+            private const string n_sTemplate_AssemblyContent = "using System; public static class {0} {{ public static object {1}() {{ return {2}; }} }}";
+            /// <summary>Имя класса в сборке, используемое по умолчанию.</summary>
+            private const string n_sDefault_ClassName="CEvaluator";
+            /// <summary>Имя метода класса в сборке, используемое по умолчанию.</summary>
+            private const string n_sDefault_MethodName="EvaluateTerm";
 
             #region Реализация шаблона одиночка (singleton)
             /// <summary>Единственный экзмепляр класса</summary>
@@ -40,8 +43,13 @@ namespace Zakharov {
                 CompilerResults c_crAssembly=CodeDomProvider.CreateProvider("c#").CompileAssemblyFromSource(
                     new CompilerParameters(new string[]{"mscorlib.dll"}) {
                         GenerateInMemory=true
-                    }, 
-                    String.Concat(n_sTemplate_AssemblyBegin,x_sTerm,n_sTemplate_AssemblyEnd));                    
+                    },
+                    String.Format(
+                        n_sTemplate_AssemblyContent, 
+                        n_sDefault_ClassName, 
+                        n_sDefault_MethodName, 
+                        x_sTerm));
+                // Проверка ошибок при компиляции сборки.
                 if (c_crAssembly.Errors.HasErrors) {
                     #region Формирование сообщения об ошибке компиляции
                     StringBuilder c_sbErrors=new StringBuilder();
@@ -50,13 +58,14 @@ namespace Zakharov {
                     throw new ArgumentException(
                         String.Format(
                             CResource.LoadString("IDS_ERR_COMPILERERROR"),
+                            x_sTerm,
                             c_sbErrors.ToString()), 
                         "x_sExpression");
                     #endregion
                 }
 
                 // Выполнение метода, возвращающего результат вычисления выражения.
-                return (T)c_crAssembly.CompiledAssembly.GetType("Evaluator").GetMethod("Evaluate").Invoke(null, null);
+                return (T)c_crAssembly.CompiledAssembly.GetType(n_sDefault_ClassName).GetMethod(n_sDefault_MethodName).Invoke(null, null);
             }
         }
     }

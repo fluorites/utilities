@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="IDS_ERR_COMPILERERROR" xml:space="preserve">
-    <value>Failed to compile the expression. {0}</value>
+    <value>Failed to compile the expression [{0}]. {1}</value>
   </data>
   <data name="IDS_ERR_EMPTYTAGAVLUE" xml:space="preserve">
     <value>Empty tag value.</value>
