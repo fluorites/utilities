@@ -12,7 +12,7 @@ using System.Collections.Generic;
 //  Создание пространства имен Антона Захарова.
 namespace Zakharov {
     //  Создание пространства имен дополнительных функций.
-    namespace Handbook {
+    namespace Utility {
 
         /// <summary>Класс дополнительных функций форматирования.</summary>
         public static class CFormat {
@@ -109,31 +109,35 @@ namespace Zakharov {
 
                 return c_sMessage;
             }
-            /// <summary>Формирование строки с хэш-кодом передаваемой строки.</summary>
-            /// <param name="x_sSource">строка, для которой необходимо рассчитать хэш-код.</param>
-            /// <returns>строка с хэш-кодом передаваемой строки.</returns>
-            public static string GetHash(this string x_sSource) {
-                string c_sHashValue="";
+        }
 
-                if (!String.IsNullOrEmpty(x_sSource)) {
-                    // Получение хэш-кода переданной строки в виде массива целых чисел.
-                    byte[] c_bHashValue=(new SHA1Managed()).ComputeHash((new UnicodeEncoding()).GetBytes(x_sSource));
-                    // Преобразование хэш-кода в строку.
-                    foreach (byte c_bHashByte in c_bHashValue)
-                        c_sHashValue+=c_bHashByte.ToString();
-                }
-
-                return c_sHashValue;
-            }
+        /// <summary>Класс дополнительных функций работы со строками.</summary>
+        public static class CString {
             /// <summary>Выделение первых n-символов в строке.</summary>
             /// <param name="x_sSource">строка, из которой необходимо выделить первых n-символов.</param>
             /// <param name="x_iCount">количество символов.</param>
             /// <returns>строка из n первых символов передаваемой строки или передаваемая строка, если количество символов в ней меньше n.</returns>
             public static string Choose(this string x_sSource, int x_iCount) {
-                if (x_sSource.Length<x_iCount)
+                if(x_sSource.Length < x_iCount)
                     return x_sSource;
                 else
-                    return x_sSource.Substring(0, x_iCount);                
+                    return x_sSource.Substring(0, x_iCount);
+            }
+            /// <summary>Формирование строки с хэш-кодом передаваемой строки.</summary>
+            /// <param name="x_sSource">строка, для которой необходимо рассчитать хэш-код.</param>
+            /// <returns>строка с хэш-кодом передаваемой строки.</returns>
+            public static string GetHash(this string x_sSource) {
+                string c_sHashValue = "";
+
+                if(!String.IsNullOrEmpty(x_sSource)) {
+                    // Получение хэш-кода переданной строки в виде массива целых чисел.
+                    byte[] c_bHashValue = (new SHA1Managed()).ComputeHash((new UnicodeEncoding()).GetBytes(x_sSource));
+                    // Преобразование хэш-кода в строку.
+                    foreach(byte c_bHashByte in c_bHashValue)
+                        c_sHashValue += c_bHashByte.ToString();
+                }
+
+                return c_sHashValue;
             }
             /// <summary>Сцепление строк со вставкой между ними разделителя.</summary>
             /// <param name="x_sValues">список сцепляемых строк.</param>
@@ -142,10 +146,10 @@ namespace Zakharov {
             public static string GetConcat(IEnumerable<string> x_sValues, char x_cSeparator) {
                 StringBuilder c_sbValues = new StringBuilder();
 
-                foreach (string c_sValue in x_sValues)
+                foreach(string c_sValue in x_sValues)
                     c_sbValues.Append(c_sValue + x_cSeparator);
 
-                return c_sbValues.ToString(); 
+                return c_sbValues.ToString();
             }
         }
 

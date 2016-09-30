@@ -1,7 +1,7 @@
 ﻿using System;
 using System.CodeDom.Compiler;
 using System.Text;
-using Zakharov.Handbook;
+using Zakharov.Utility;
 
 //  Создание пространства имен Антона Захарова.
 namespace Zakharov {

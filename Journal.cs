@@ -9,7 +9,7 @@ using System.Data.SqlServerCe;
 using System.Runtime.Serialization;
 using System.Xml;
 
-using Zakharov.Handbook;
+using Zakharov.Utility;
 using System.Configuration;
 using System.Collections.Generic;
 

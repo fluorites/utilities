@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Zakharov.Handbook;
+using Zakharov.Utility;
 
 //  Создание пространства имен Антона Захарова.
 namespace Zakharov {
@@ -59,7 +59,7 @@ namespace Zakharov {
             /// <summary>Возвращает строковое представление текущего объекта.</summary>
             /// <returns>Строка, представляющая текущий объект.</returns>
             public override string ToString() {
-                return CFormat.GetConcat(m_hsTags,n_cSettings_TagSeparator);                
+                return CString.GetConcat(m_hsTags,n_cSettings_TagSeparator);                
             }
             /// <summary>Играет роль хэш-функции для определённого типа.</summary>
             /// <returns>Хэш-код для текущего объекта.</returns>
