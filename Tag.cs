@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Zakharov.Utility;
+using Onuphrius.Utility;
 
-//  Создание пространства имен Антона Захарова.
-namespace Zakharov {
+//  Создание пространства имен Онуфрия Токарева.
+namespace Onuphrius {
     //  Создание пространства имен тегов.
     namespace Tag {
 

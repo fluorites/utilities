@@ -8,9 +8,10 @@ using Microsoft.Win32;
 using System.Text;
 using System.Security.Cryptography;
 using System.Collections.Generic;
+using System.IO;
 
-//  Создание пространства имен Антона Захарова.
-namespace Zakharov {
+//  Создание пространства имен Онуфрия Токарева.
+namespace Onuphrius {
     //  Создание пространства имен дополнительных функций.
     namespace Utility {
 
@@ -159,7 +160,7 @@ namespace Zakharov {
             /// <param name="x_sName">имя ресурса.</param>
             /// <returns>строка со значением требуемой ресурсной строки.</returns>
             /// <remarks>Для поиска строки выбирается ресурсный файл с именем Strings.resx.</remarks>
-            static public string LoadString(string x_sName) {
+            public static string LoadString(string x_sName) {
                 ResourceManager c_rmManager=new ResourceManager(
                     Assembly.GetCallingAssembly().GetName().Name+".Strings",
                     Assembly.GetCallingAssembly());
@@ -201,7 +202,7 @@ namespace Zakharov {
             /// <param name="x_sElementName">имя нового элемента.</param>
             /// <param name="x_lElementType">тип нового элемента.</param>
             /// <param name="x_sElementData">данные нового элемента.</param>
-            static public void AddElement(
+            public static void AddElement(
                 XmlNode x_xnElementParent,
                 string x_sElementName,
                 ElementTypeEnum x_lElementType,
@@ -237,7 +238,7 @@ namespace Zakharov {
             /// <summary>Формирование строки с информацией об узле с исключением подчиненных элементов.</summary>
             /// <param name="x_xnElementNode">узел документа XML.</param>
             /// <returns>строка с информацией об узле.</returns>
-            static public string GetElement(XmlNode x_xnElementNode) {
+            public static string GetElement(XmlNode x_xnElementNode) {
                 string c_sElementNode="<"+x_xnElementNode.Name;
 
                 // Перебор всех атрибутов узла.
@@ -250,12 +251,30 @@ namespace Zakharov {
             /// <summary>Формирование узла из строки с информацией об узле.</summary>
             /// <param name="x_sElementNode">строка с информацией об узле.</param>
             /// <returns>узел документа XML.</returns>
-            static public XmlNode GetElement(string x_sElementNode) {
+            public static XmlNode GetElement(string x_sElementNode) {
                 // Получение документа XML.
                 XmlDocument c_xdElementDocument=new XmlDocument();
                 c_xdElementDocument.LoadXml(x_sElementNode);
                 // Получение узла документа XML.
                 return c_xdElementDocument.FirstChild;
+            }
+        }
+
+        /// <summary>Класс дополнительных функций работы с каталогами и подкаталогами.</summary>
+        public static class CDirectory {
+            /// <summary>
+            /// Получение всех подкатологов (включая вложенные) текущего каталога
+            /// </summary>
+            /// <param name="x_diDirectory">текущий каталог, для которого необходимо получить все подкаталоги</param>
+            /// <returns>массив всех подкатологов (включая вложенные) текущего каталога</returns>
+            public static DirectoryInfo[] GetSubdirectories(this DirectoryInfo x_diDirectory) {
+                List<DirectoryInfo> c_lsSubdirectories = new List<DirectoryInfo>();
+
+                c_lsSubdirectories.AddRange(x_diDirectory.GetDirectories());
+                foreach(DirectoryInfo c_diDirectory in x_diDirectory.GetDirectories())
+                    c_lsSubdirectories.AddRange(c_diDirectory.GetSubdirectories());
+
+                return c_lsSubdirectories.ToArray();
             }
         }
     }    

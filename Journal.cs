@@ -9,12 +9,12 @@ using System.Data.SqlServerCe;
 using System.Runtime.Serialization;
 using System.Xml;
 
-using Zakharov.Utility;
+using Onuphrius.Utility;
 using System.Configuration;
 using System.Collections.Generic;
 
-//  Создание пространства имен Антона Захарова.
-namespace Zakharov {
+//  Создание пространства имен Онуфрия Токарева.
+namespace Onuphrius {
     //  Создание пространства имен журнала сообщений.
     namespace Journal {
 

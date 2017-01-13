@@ -1,10 +1,10 @@
 ﻿using System;
 using System.CodeDom.Compiler;
 using System.Text;
-using Zakharov.Utility;
+using Onuphrius.Utility;
 
-//  Создание пространства имен Антона Захарова.
-namespace Zakharov {
+//  Создание пространства имен Онуфрия Токарева.
+namespace Onuphrius {
     //  Создание пространства имен выражений.
     namespace Term {
 
